@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('/assets/css/fontes/San-Francisco-Pro-Fonts-master/SF-Pro.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'SF Pro Display', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#cabecalho {
+    text-align: center;
+}
+
+
+main {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#produtos, #carrossel {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+#produtos h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#carrossel{
+    text-align: center;
+}
+
+.carousel{
+    margin: auto;
+    max-width: 600px;
+}
+
+.carousel-item img{
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
