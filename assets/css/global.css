@@ -1,14 +1,7 @@
-@font-face {
-    font-family: 'SF Pro Display';
-    src: url('/assets/css/fontes/San-Francisco-Pro-Fonts-master/SF-Pro.ttf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html {
     --background-header: white;
-    --color-header: white;
-    --background-footer: coral;
+    --color-header: black;
+    --background-footer: white;
     --color-footer: black;
     --background-main: white;
     --color-main: #121212;
@@ -16,7 +9,7 @@ html {
 
 html[data-theme="dark"] {
     --background-header: #121212;
-    --color-header: #121212;
+    --color-header: lightgrey;
     --background-footer: #121212;
     --color-footer: lightgrey;
     --background-main: #121212;
@@ -24,37 +17,87 @@ html[data-theme="dark"] {
     --background-body:#121212;
 }
 
-.navbar{
-    background-color: lightgrey;
-    justify-content: space-evenly;
-}
+/*section{
+    border: 2px solid black ;
+}*/
 
-#navul{
-    justify-content: space-evenly;
-}
-
-#navul li{
-    padding: 10px;
+.menu_bar{
+    background-color: var(--background-header);
+    height: 80px;
+    width: 100%;
+    display:flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
 }
+
+.logo{
+    color: var(--color-header);
+    font-size: 30px;
+}
+
+.menu_bar ul{
+    list-style: none;
+    display: flex;
+}
+
+.menu_bar ul li{
+    padding: 10px 30px;
+    position: relative;
+}
+
+.menu_bar ul li a{
+    color: var(--color-header);
+    text-decoration: none;
+    font-size: 20px;
+
+    transition: all 0.3s;
+}
+
+.menu_bar ul li a:hover{
+    color: var(--color-header)
+}
+
+.dropdown{
+    display: none;
+}
+
+.menu_bar ul li:hover .dropdown{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color:var(--background-header);
+}
+
+.dropdown ul{
+    display: block;
+    margin: 10px;
+}
+
+.dropdown ul li{
+    width: 150px;
+    padding: 10px;
+}
+
 
 body {
     font-family: 'SF Pro Display', sans-serif;
-    margin: 0;
     padding: 0;
     background-color: var(--background-body);
+    height: 100%;
+    width: 100%;
 }
+
+body main p{
+    font-size: 20px;
+}
+
 
 header {
     background-color: var(--background-header);
     padding: 10px;
-    border-bottom: 1px solid #ddd;
     color: var(--color-header);
-}
-
-
-#cabecalho {
-    text-align: center;
 }
 
 
@@ -62,15 +105,13 @@ main {
     background-color: var(--background-main);
     color: var(--color-main);
     padding: 20px;
-    margin-top: 20px;
 }
 
-#produtos,
 #carrossel {
     margin: 20px 0;
     padding: 20px;
-    border-top: 1px solid;
 }
+
 
 #produtos h2 {
     text-align: center;
@@ -87,6 +128,7 @@ main {
     max-width: 600px;
 }
 
+
 .carousel-item img {
     width: 100%;
     height: auto;
@@ -96,12 +138,58 @@ footer {
     background-color: var(--background-footer);
     color: var(--color-footer);
     padding: 10px;
-    border-top: 1px solid #ddd;
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
 }
+
 
 #contato {
     list-style: none;
     display: inline-block;
 }
+input[type="checkbox"] {
+  --background-header: var(--background-main);
+  --color-header: var(--color-main);
+}
+/* Estilos para telas pequenas (celulares e tablets até 768px) */
+@media (max-width: 768px) {
+    .menu_bar {
+        height: auto;
+        flex-direction: row; /* Manter os itens alinhados na horizontal */
+        align-items: center;
+        padding: 10px; /* Adicionar espaçamento */
+        justify-content: space-between; /* Distribuir os itens horizontalmente */
+        max-width: 100%; /* Limitar a largura do menu */
+    }
+
+    .logo {
+        margin-right: 10px; /* Espaçamento entre a logo e o menu */
+        font-size: 20px; /* Reduzir o tamanho da fonte da logo se necessário */
+    }
+
+    .menu_bar ul {
+        flex-direction: row; /* Manter os itens alinhados na horizontal */
+        justify-content: space-around; /* Distribuir os itens igualmente */
+        width: 100%;
+        padding: 0;
+        max-width: 100%; /* Limitar a largura do menu */
+    }
+
+    .menu_bar ul li {
+        padding: 8px 12px; /* Espaçamento interno dos itens do menu */
+        width: auto;
+    }
+
+    .menu_bar ul li a{
+        font-size: 15px
+    }
+
+    .menu_bar ul li:hover .dropdown {
+        position: absolute;
+        left: 0;
+        top: 100%;
+    }
+}
+
+
+
