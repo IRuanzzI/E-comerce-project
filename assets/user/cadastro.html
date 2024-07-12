@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/assets/css/user.css">
+    <script src="/assets/js/cadastro.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div id="cadastro">
+                <form method="post" action="">
+                    <h1>Cadastro</h1>
+                    <p>
+                        <label for="nome_cad">Insira seu nome</label>
+                        <input id="nome_cad" name="nome_cad" required="required" type="text" placeholder="Nome">
+                    </p>
+                    <p>
+                        <label for="email_cad">Isira um e-mail</label>
+                        <input  id="email_cad" name="email_cad" required="required" type="email" placeholder="seuemail@dominio.com">
+                    </p>
+                    <p>
+                        <label for="senha_cad">Insira uma senha</label>
+                        <input id="senha_cad" name="senha_cad" required="required" type="password" placeholder="ex 1234">
+                    </p>
+                    <p>
+                        <input onclick="cadastrar()" type="submit" value="Cadastrar" id="btn-cadastro">
+                    </p>
+                    <p class="link">
+                        Já tem uma conta?
+                        <a id="paraLogin" href="/assets/user/login.html">Fazer login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

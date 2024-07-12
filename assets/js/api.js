@@ -1,10 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const fakeStoreApi = 'https://fakestoreapi.com/products?limit=3';
-    let productsLoaded = false;
+    const fakeStoreApi = 'https://fakestoreapi.com/products';
+    const fakeStoreApiLimit = 'https://fakestoreapi.com/products?limit=3';
 
-    // Função para adicionar os produtos no carrossel
-    function addProductsToCarousel(products) {
-        const carouselInner = document.getElementById('carouselInner');
+    async function fetchProducts(url) {
+        const response = await fetch(url);
+        const products = await response.json();
+        return products;
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function addProductsToCarousel(products, carouselInnerId, limit = null) {
+        if (limit !== null) {
+            products = products.slice(0, limit);
+        } else {
+            shuffle(products); // Embaralha os produtos
+        }
+
+        const carouselInner = document.getElementById(carouselInnerId);
         carouselInner.innerHTML = ''; // Limpa os itens existentes
 
         products.forEach((product, index) => {
@@ -26,21 +44,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Função para carregar produtos se ainda não foram carregados
-    function loadProductsIfNeeded() {
-        if (!productsLoaded) {
-            fetch(fakeStoreApi)
-                .then(response => response.json())
-                .then(products => {
-                    addProductsToCarousel(products);
-                    productsLoaded = true; // Marca os produtos como carregados
-                })
-                .catch(error => {
-                    console.error('Erro ao obter produtos da Fake Store:', error);
-                });
-        }
+    async function initializeCarousels() {
+        const productsLimited = await fetchProducts(fakeStoreApiLimit);
+        const productsAll = await fetchProducts(fakeStoreApi);
+
+        addProductsToCarousel(productsLimited, 'carouselInner', 3); // Primeiro carrossel com limite de 3
+        addProductsToCarousel(productsAll, 'carouselInnerAl'); // Segundo carrossel com todos os itens aleatórios
     }
 
-    // Chama a função para carregar os produtos quando a página for carregada
-    loadProductsIfNeeded();
+    initializeCarousels();
 });

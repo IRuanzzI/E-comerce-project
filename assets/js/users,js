@@ -1,0 +1,54 @@
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const session = require('express-session');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Configuração do middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(session({ secret: 'abc', resave: false, saveUninitialized: true }));
+
+// Endpoint para cadastro
+app.post('/cadastro', (req, res) => {
+    const { nomescad, emailcad, senhacad } = req.body;
+
+    // Aqui você pode salvar os dados em um arquivo JSON ou em um banco de dados
+    // Exemplo: salvar em um arquivo JSON
+    const usuarioscad = JSON.parse(fs.readFileSync('/user.json'));
+
+    const datauser = {
+        nome: nomescad,
+        email: emailcad,
+        senha: senhacad
+    };
+
+    usuarioscad.push(datauser);
+
+    fs.writeFile('./usuarios.json', JSON.stringify(usuarioscad, null, 4), (error) => {
+        if (error) {
+            console.error('Erro ao salvar arquivo de usuários:', error);
+            res.send('erro');
+            return;
+        }
+        console.log('Cadastro realizado com sucesso:', datauser);
+        res.send('cadastrado');
+    });
+});
+
+// Servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Iniciar o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor está rodando na porta ${PORT}`);
+});
+// Servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Iniciar o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor está rodando na porta ${PORT}`);
+});
